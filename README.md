@@ -50,5 +50,5 @@ Hey there, I'm Pranava, an 8th-grade student with a passion for computer science
 #
    
 ###  Contacts
-[website]: PranavaKCode.github.io
+<[website]: PranavaKCode.github.io>
 [youtube]: https://www.youtube.com/@thecapitalist4560
