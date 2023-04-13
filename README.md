@@ -46,9 +46,6 @@ Hey there, I'm Pranava, an 8th-grade student with a passion for computer science
 <details>
  <summary><h3>👨‍💻 Pranava's Coding Journey</h3></summary>
    I started my coding journey as a naive computer science student with a passion to learn everything I could about this programming world - code, AI, machine learning, and neural networks. And all the while, teaching myself iOS development with a dream to build my own app, but that soon got overshadowed by my desire to excel in AI and ML.  I'm always looking for ways to use technology to make my life easier, whether it's by coding web apps, creating neural networks to analyze information or automating tasks with scripts.
-   
-#
-   
-###  Contacts
+
 [website]: PranavaKCode.github.io
 [youtube]: https://www.youtube.com/@thecapitalist4560
