@@ -31,7 +31,9 @@ Hey there, I'm Pranava, an 8th-grade student with a passion for computer science
 ----
 
 ###  Latest Projects
-
+-Created Two player chess
+-Is good
+- Is good
 ---
 
 ### 📊 Stats
