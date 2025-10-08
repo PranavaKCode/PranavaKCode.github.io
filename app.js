@@ -1,4 +1,3 @@
-@@ -0,0 +1,533 @@
 // DOM elements
 const loading = document.getElementById('loading');
 const navToggle = document.querySelector('.nav-toggle');
