@@ -531,3 +531,32 @@ window.addEventListener('beforeunload', () => {
 });
 
 console.log('Portfolio website with typewriter effect initialized successfully!');
+function initParticles() {
+  const styles = getComputedStyle(document.documentElement);
+  const primary = styles.getPropertyValue('--color-primary')?.trim() || '#21808d';
+  if (!document.getElementById('particles-bg') || !window.tsParticles) return;
+
+  tsParticles.load({
+    id: 'particles-bg',
+    options: {
+      fullScreen: { enable: false },
+      background: { color: { value: 'transparent' } },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 90, density: { enable: true, area: 800 } },
+        color: { value: primary },
+        shape: { type: 'circle' },
+        opacity: { value: 0.6 },
+        size: { value: { min: 1, max: 3 } },
+        links: { enable: true, color: primary, distance: 120, opacity: 0.35, width: 1 },
+        move: { enable: true, speed: 1.2, outModes: { default: 'bounce' } }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: ['grab'] }, onClick: { enable: true, mode: ['push'] }, resize: true },
+        modes: { grab: { distance: 140, links: { opacity: 0.6 } }, push: { quantity: 3 } }
+      },
+      detectRetina: true
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', () => { initParticles(); /* keep your other inits */ });
