@@ -774,7 +774,9 @@ select.form-control {
   100% { transform: rotate(360deg); }
 }
 
-/* Navigation */
+/* ============================= */
+/* Navigation (Enhanced Contrast) */
+/* ============================= */
 .nav {
   position: fixed;
   top: 0;
@@ -784,8 +786,10 @@ select.form-control {
   backdrop-filter: blur(10px);
   z-index: 1000;
   transition: all var(--duration-normal) var(--ease-standard);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Container setup */
 .nav-container {
   max-width: var(--container-xl);
   margin: 0 auto;
@@ -796,12 +800,15 @@ select.form-control {
   height: 70px;
 }
 
+/* Logo brighter for visibility */
 .nav-logo {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: #e6fbff; /* lighter cyan/white */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
+/* Navigation links */
 .nav-menu {
   display: flex;
   list-style: none;
@@ -811,7 +818,7 @@ select.form-control {
 }
 
 .nav-link {
-  color: var(--color-text);
+  color: rgba(255, 255, 255, 0.9); /* brighter text */
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-sm);
@@ -820,12 +827,16 @@ select.form-control {
   transition: all var(--duration-fast) var(--ease-standard);
 }
 
+/* Hover and active states */
 .nav-link:hover,
 .nav-link.active {
-  color: var(--color-primary);
-  background: var(--color-secondary);
+  color: #ffffff; /* pure white */
+  background: rgba(50, 184, 198, 0.18); /* teal highlight */
+  box-shadow: inset 0 0 0 1px rgba(50, 184, 198, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
+/* Toggle (mobile menu) */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -838,7 +849,7 @@ select.form-control {
 .nav-toggle span {
   width: 25px;
   height: 3px;
-  background: var(--color-text);
+  background: rgba(255, 255, 255, 0.9);
   margin: 3px 0;
   transition: var(--duration-fast) var(--ease-standard);
   border-radius: 2px;
@@ -847,14 +858,21 @@ select.form-control {
 .nav-toggle.active span:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
-
 .nav-toggle.active span:nth-child(2) {
   opacity: 0;
 }
-
 .nav-toggle.active span:nth-child(3) {
   transform: rotate(45deg) translate(-5px, -6px);
 }
+
+/* Slightly larger and more spaced out links on larger screens */
+@media (min-width: 1024px) {
+  .nav-link {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+}
+
 
 /* Hero Section */
 .hero {
