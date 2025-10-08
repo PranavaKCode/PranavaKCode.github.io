@@ -534,12 +534,14 @@ console.log('Portfolio website with typewriter effect initialized successfully!'
 function initParticles() {
   const styles = getComputedStyle(document.documentElement);
   const primary = styles.getPropertyValue('--color-primary')?.trim() || '#21808d';
+
+  // bail if container or library missing
   if (!document.getElementById('particles-bg') || !window.tsParticles) return;
 
   tsParticles.load({
     id: 'particles-bg',
     options: {
-      fullScreen: { enable: false },
+      fullScreen: { enable: false },          // only inside hero
       background: { color: { value: 'transparent' } },
       fpsLimit: 60,
       particles: {
@@ -559,4 +561,15 @@ function initParticles() {
     }
   });
 }
-document.addEventListener('DOMContentLoaded', () => { initParticles(); /* keep your other inits */ });
+
+document.addEventListener('DOMContentLoaded', () => {
+  // your existing init calls...
+  initNavigation?.();
+  initScrollEffects?.();
+  initAnimations?.();
+  initContactForm?.();
+  initTypewriter?.();
+
+  // particles
+  initParticles();
+});
