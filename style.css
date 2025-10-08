@@ -1568,3 +1568,10 @@ select.form-control {
     -webkit-text-fill-color: var(--color-primary);
   }
 }
+.hero { position: relative; overflow: hidden; }
+.hero::before { z-index: 0; }     /* let particles sit above this overlay */
+#particles-bg {
+  position: absolute; inset: 0; z-index: 1;
+  pointer-events: none;          /* clicks pass through */
+}
+.hero-content { position: relative; z-index: 2; }
