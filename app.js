@@ -532,3 +532,156 @@ window.addEventListener('beforeunload', () => {
 });
 
 console.log('Portfolio website with typewriter effect initialized successfully!');
+
+// ============================= 
+// PARTICLE NETWORK ANIMATION
+// =============================
+
+class ParticleNetwork {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.particles = [];
+    this.mouse = { x: null, y: null, radius: 150 };
+    
+    // Use the site's teal color scheme
+    this.particleColor = 'rgba(33, 128, 141, 0.8)'; // --color-teal-500
+    this.lineColor = 'rgba(50, 184, 198, 0.15)'; // --color-teal-300 with low opacity
+    
+    this.resize();
+    this.init();
+    this.animate();
+    
+    // Event listeners
+    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+    window.addEventListener('mouseout', () => this.handleMouseOut());
+  }
+  
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    
+    // Recalculate particle count based on screen size
+    this.particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
+    
+    // Reinitialize particles on resize
+    if (this.particles.length > 0) {
+      this.init();
+    }
+  }
+  
+  init() {
+    this.particles = [];
+    for (let i = 0; i < this.particleCount; i++) {
+      this.particles.push(new Particle(this.canvas.width, this.canvas.height));
+    }
+  }
+  
+  handleMouseMove(e) {
+    this.mouse.x = e.x;
+    this.mouse.y = e.y;
+  }
+  
+  handleMouseOut() {
+    this.mouse.x = null;
+    this.mouse.y = null;
+  }
+  
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    // Update and draw particles
+    for (let i = 0; i < this.particles.length; i++) {
+      this.particles[i].update(this.canvas.width, this.canvas.height, this.mouse);
+      this.particles[i].draw(this.ctx, this.particleColor);
+    }
+    
+    // Connect particles with lines
+    this.connectParticles();
+    
+    requestAnimationFrame(() => this.animate());
+  }
+  
+  connectParticles() {
+    for (let i = 0; i < this.particles.length; i++) {
+      for (let j = i + 1; j < this.particles.length; j++) {
+        const dx = this.particles[i].x - this.particles[j].x;
+        const dy = this.particles[i].y - this.particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Draw line if particles are close enough
+        if (distance < 120) {
+          const opacity = 1 - (distance / 120);
+          this.ctx.strokeStyle = this.lineColor.replace('0.15', String(opacity * 0.15));
+          this.ctx.lineWidth = 1;
+          this.ctx.beginPath();
+          this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+          this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+          this.ctx.stroke();
+        }
+      }
+    }
+  }
+}
+
+class Particle {
+  constructor(canvasWidth, canvasHeight) {
+    this.x = Math.random() * canvasWidth;
+    this.y = Math.random() * canvasHeight;
+    this.vx = (Math.random() - 0.5) * 0.5;
+    this.vy = (Math.random() - 0.5) * 0.5;
+    this.size = Math.random() * 2 + 1;
+  }
+  
+  update(canvasWidth, canvasHeight, mouse) {
+    // Bounce off edges
+    if (this.x < 0 || this.x > canvasWidth) this.vx = -this.vx;
+    if (this.y < 0 || this.y > canvasHeight) this.vy = -this.vy;
+    
+    // Mouse interaction - particles move away from cursor
+    if (mouse.x !== null && mouse.y !== null) {
+      const dx = this.x - mouse.x;
+      const dy = this.y - mouse.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < mouse.radius) {
+        const angle = Math.atan2(dy, dx);
+        const force = (mouse.radius - distance) / mouse.radius;
+        this.vx += Math.cos(angle) * force * 0.2;
+        this.vy += Math.sin(angle) * force * 0.2;
+      }
+    }
+    
+    // Apply friction
+    this.vx *= 0.99;
+    this.vy *= 0.99;
+    
+    // Update position
+    this.x += this.vx;
+    this.y += this.vy;
+  }
+  
+  draw(ctx, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Initialize particle network after DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initParticleNetwork);
+} else {
+  initParticleNetwork();
+}
+
+function initParticleNetwork() {
+  const canvas = document.getElementById('particle-canvas');
+  if (canvas) {
+    new ParticleNetwork(canvas);
+    console.log('Particle network initialized!');
+  }
+}
+
