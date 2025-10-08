@@ -1568,3 +1568,28 @@ box-shadow: var(--focus-ring);
 -webkit-text-fill-color: var(--color-primary);
 }
 }
+/* ============================= */
+/* Particle Network Background */
+/* ============================= */
+
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Ensure all content appears above particles */
+.nav,
+.hero,
+.section,
+.loading,
+#scrollTop {
+  position: relative;
+  z-index: 1;
+}
+
