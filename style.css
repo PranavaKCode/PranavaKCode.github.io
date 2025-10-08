@@ -777,17 +777,17 @@ select.form-control {
 /* ============================= */
 /* Navigation (Enhanced Contrast) */
 /* ============================= */
-.nav {
+.nav{
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(31, 33, 33, 0.95);
-  backdrop-filter: blur(10px);
+  top: 0; left: 0; right: 0;
   z-index: 1000;
-  transition: all var(--duration-normal) var(--ease-standard);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(31,33,33,0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari/Chrome */
+  transform: translateZ(0);            /* fix compositing gap */
+  will-change: transform;              /* stabilize on repaint */
 }
+
 
 /* Container setup */
 .nav-container {
