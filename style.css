@@ -1569,9 +1569,19 @@ select.form-control {
   }
 }
 .hero { position: relative; overflow: hidden; }
-.hero::before { z-index: 0; }     /* let particles sit above this overlay */
+
+/* Your overlay must sit below the particles */
+.hero::before { z-index: 0; }
+
+/* Particle canvas fills hero, sits above overlay but below text */
 #particles-bg {
-  position: absolute; inset: 0; z-index: 1;
-  pointer-events: none;          /* clicks pass through */
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
+
+/* Ensure your content is above the particles */
 .hero-content { position: relative; z-index: 2; }
+
+
