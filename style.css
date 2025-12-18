@@ -1239,6 +1239,14 @@ select.form-control {
   margin-bottom: var(--space-20);
 }
 
+.project-links{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+
 /* Awards Section */
 .awards-grid {
   display: grid;
